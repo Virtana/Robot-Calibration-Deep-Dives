@@ -33,7 +33,38 @@ public:
                     link2_ * sin(offset_joint1_ - offset1[0] + offset_joint2_ - offset2[0])) -
                   true_y_;
 
-    return true;
+  for (YAML::const_iterator it = data.begin(); it != data.end(); ++it)
+  {
+    const YAML::Node& reading = *it;
+
+    // Storing in vectors using for loop.
+    angle_yaml.push_back(reading["joint_angles"][0].as<double>());
+    angle_yaml.push_back(reading["joint_angles"][1].as<double>());
+    position_yaml.push_back(reading["end_effector_position"][0].as<double>());
+    position_yaml.push_back(reading["end_effector_position"][1].as<double>());
+  }
+
+  // Printing the offset joint angles and actual end effector positions.
+  for (int i = 0; i < data_num_max_; i++)
+  {
+    ROS_INFO("%F", angle_yaml[2 * i]);
+    ROS_INFO("%F", angle_yaml[2 * i + 1]);
+    ROS_INFO("%F", position_yaml[2 * i]);
+    ROS_INFO("%F", position_yaml[2 * i + 1]);
+  }
+
+  // Initial values of offsets for ceres solver.
+  double offset1 = 0.0;
+  double offset2 = 0.0;
+
+  ceres::Problem problem;
+  for (int i = 0; i < data_num_max_; i++)
+  {
+    // 2, 1, 1 since there are two residuals (and x and y residual) and an offset value for each joint angle. 
+    problem.AddResidualBlock(
+        new ceres::AutoDiffCostFunction<OffsetCalibration, 2, 1, 1>(new OffsetCalibration(
+            angle_yaml[2 * i], angle_yaml[2 * i + 1], position_yaml[2 * i], position_yaml[2 * i + 1], link1, link2)),
+        NULL, &offset1, &offset2);
   }
 
 private:
