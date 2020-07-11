@@ -1,0 +1,86 @@
+<robot name="robo_2d">
+
+<link name="link0">
+    
+    <visual name="">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <geometry>
+            <box size="0.2 0.025 0.0"/>
+        </geometry>
+        <material name="">
+            <color rgba="1.0 0.0 0.0 1.0"/>
+            <texture filename=""/>
+        </material>
+    </visual>
+
+</link>
+
+<link name="link1">
+
+    <visual name="">
+        <origin xyz="-0.025 0.15 0.0" rpy="0.0 0.0 0.0"/>
+        <geometry>
+            <box size="0.05 0.5 0.0"/>
+        </geometry>
+        <material name="">
+            <color rgba="0.0 0.0 1.0 1.0"/>
+            <texture filename=""/>
+        </material>
+    </visual>
+
+</link>
+
+<link name="link2">
+
+    <visual name="">
+        <origin xyz="0.0 0.25 0.0" rpy="0.0 0.0 0.0"/>
+        <geometry>
+            <box size="0.05 0.5 0.0"/>
+        </geometry>
+        <material name="">
+            <color rgba="0.0 0.0 1.0 1.0"/>
+            <texture filename=""/>
+        </material>
+    </visual>
+
+</link>
+
+<link name="endlink">
+ 
+    <visual name="">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <geometry>
+            <box size="0.0 0.0 0.0"/>
+        </geometry>
+        <material name="">
+            <color rgba="1.0 0.0 0.0 1.0"/>
+            <texture filename=""/>
+        </material>
+    </visual>
+
+</link>
+
+
+<joint name="joint1" type="continuous">
+    <origin xyz="0.025 0.1 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="link0"/>
+    <child link="link1"/>
+    <axis xyz="0.0 1 0.0"/>
+ 
+</joint>
+
+<joint name="joint2" type="continuous">
+    <origin xyz="-0.025 0.4 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="link1"/>
+    <child link="link2"/>
+    <axis xyz="0.0 1 0.0"/>
+
+</joint>
+
+<joint name="end_effector" type="fixed">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <parent link="link2"/>
+    <child link="endlink"/>
+</joint>
+    
+</robot>
