@@ -203,7 +203,10 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+<<<<<<< HEAD
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 add_executable(state_publisher state_publisher/my_2d_robo_state_publisher.cpp)
 target_link_libraries(state_publisher ${catkin_LIBRARIES})
+=======
+>>>>>>> 5a3f4bc... Uploading the created package with URDf

@@ -1,5 +1,8 @@
 *.pdf
+<<<<<<< HEAD
 *.gv
 robo_2d.gv
 
 
+=======
+>>>>>>> 5a3f4bc... Uploading the created package with URDf
