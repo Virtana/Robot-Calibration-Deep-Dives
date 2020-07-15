@@ -14,8 +14,9 @@ int main(int argc, char** argv){
 
     while(ros::ok){
         joint_state.header.stamp = ros::Time::now();
-        //research this!!!
-        joint_state.name = ;
+        joint_state.name = joint1;
+        joint_state.position = {0,0}
+        joint_state.name = joint2;
         joint_state.position = {0,0}
     }
 
