@@ -6,10 +6,14 @@
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         <geometry>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <box size="0.2 0.15 0.025"/>
 =======
             <box size="0.2 0.025 0.15"/>
 >>>>>>> 5a3f4bc... Uploading the created package with URDf
+=======
+            <box size="0.2 0.15 0.025"/>
+>>>>>>> 38e6f06... updated .gitignore
         </geometry>
         <material name="">
             <color rgba="1.0 0.0 0.0 1.0"/>
@@ -23,6 +27,7 @@
 
     <visual name="">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <origin xyz="-0.025 0.0 0.15" rpy="0.0 0.0 0.0"/>
         <geometry>
             <box size="0.25 0.15 0.5"/>
@@ -31,6 +36,11 @@
         <geometry>
             <box size="0.25 0.5 0.15"/>
 >>>>>>> 5a3f4bc... Uploading the created package with URDf
+=======
+        <origin xyz="-0.025 0.0 0.15" rpy="0.0 0.0 0.0"/>
+        <geometry>
+            <box size="0.25 0.15 0.5"/>
+>>>>>>> 38e6f06... updated .gitignore
         </geometry>
         <material name="">
             <color rgba="1 1 1 1"/>
@@ -44,6 +54,7 @@
 
     <visual name="">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <origin xyz="0.0 0.0 0.25" rpy="0.0 0.0 0.0"/>
         <geometry>
             <box size="0.25 0.15 0.5"/>
@@ -52,6 +63,11 @@
         <geometry>
             <box size="0.25 0.5 0.15"/>
 >>>>>>> 5a3f4bc... Uploading the created package with URDf
+=======
+        <origin xyz="0.0 0.0 0.25" rpy="0.0 0.0 0.0"/>
+        <geometry>
+            <box size="0.25 0.15 0.5"/>
+>>>>>>> 38e6f06... updated .gitignore
         </geometry>
         <material name="">
             <color rgba="1 1 0.5 1"/>
@@ -79,25 +95,33 @@
 
 <joint name="joint1" type="continuous">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <origin xyz="0.025 0.0 0.1" rpy="0.0 0.0 0.0"/>
 =======
     <origin xyz="0.025 0.1 0.0" rpy="0.0 0.0 0.0"/>
 >>>>>>> 5a3f4bc... Uploading the created package with URDf
+=======
+    <origin xyz="0.025 0.0 0.1" rpy="0.0 0.0 0.0"/>
+>>>>>>> 38e6f06... updated .gitignore
     <parent link="base"/>
     <child link="link1"/>
-    <axis xyz="0.0 0.0 1"/>
+    <axis xyz="0.0 1 0.0"/>
  
 </joint>
 
 <joint name="joint2" type="continuous">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <origin xyz="-0.025 0.0 0.4" rpy="0.0 0.0 0.0"/>
 =======
     <origin xyz="-0.025 0.4 0.0" rpy="0.0 0.0 0.0"/>
 >>>>>>> 5a3f4bc... Uploading the created package with URDf
+=======
+    <origin xyz="-0.025 0.0 0.4" rpy="0.0 0.0 0.0"/>
+>>>>>>> 38e6f06... updated .gitignore
     <parent link="link1"/>
     <child link="link2"/>
-    <axis xyz="0.0 0.0 1"/>
+    <axis xyz="0.0 1 0.0"/>
 
 </joint>
 
@@ -113,6 +137,7 @@
 =======
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 </robot>
 >>>>>>> 5a3f4bc... Uploading the created package with URDf
 =======
@@ -120,3 +145,8 @@
 
 </robot>
 >>>>>>> a55f8e7... changed axis of rotation
+=======
+    
+    
+</robot>
+>>>>>>> 38e6f06... updated .gitignore
