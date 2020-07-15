@@ -85,7 +85,7 @@
 >>>>>>> 5a3f4bc... Uploading the created package with URDf
     <parent link="base"/>
     <child link="link1"/>
-    <axis xyz="0.0 1 0.0"/>
+    <axis xyz="0.0 0.0 1"/>
  
 </joint>
 
@@ -97,7 +97,7 @@
 >>>>>>> 5a3f4bc... Uploading the created package with URDf
     <parent link="link1"/>
     <child link="link2"/>
-    <axis xyz="0.0 1 0.0"/>
+    <axis xyz="0.0 0.0 1"/>
 
 </joint>
 
@@ -112,5 +112,11 @@
 
 =======
     
+<<<<<<< HEAD
 </robot>
 >>>>>>> 5a3f4bc... Uploading the created package with URDf
+=======
+
+
+</robot>
+>>>>>>> a55f8e7... changed axis of rotation
