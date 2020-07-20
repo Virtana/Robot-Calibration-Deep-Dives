@@ -23,7 +23,7 @@ int main(int argc, char** argv){
 
         int joint1_pos = (rand()%4);
         int joint2_pos = (rand()%4);
-        
+
         //position-angle of rotation
         joint_state.position = {0,0}; //{joint1_pos,joint2_pos};
 
@@ -40,6 +40,7 @@ int main(int argc, char** argv){
 
     return 0;
 }
+
 
 
 
