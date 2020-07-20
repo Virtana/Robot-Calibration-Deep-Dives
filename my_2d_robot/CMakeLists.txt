@@ -160,8 +160,8 @@ add_executable(${PROJECT_NAME}_node src/my_2d_robo_state_publisher.cpp)
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
 #SUBSCRIBER NODE
-add_executable(${PROJECT_NAME}_subscriber src/joint_states_subscriber.cpp)
-target_link_libraries(${PROJECT_NAME}_subscriber ${catkin_LIBRARIES})
+add_executable(${PROJECT_NAME}_subscriber_node src/joint_states_subscriber.cpp)
+target_link_libraries(${PROJECT_NAME}_subscriber_node ${catkin_LIBRARIES})
 
 #############
 ## Install ##

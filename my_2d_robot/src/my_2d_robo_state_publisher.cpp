@@ -13,16 +13,19 @@ int main(int argc, char** argv){
 
     sensor_msgs::JointState joint_state;
     
-    int joint1_pos = (rand()%4);
-    int joint2_pos = (rand()%4);
+
     
     while(ros::ok){
         joint_state.header.stamp = ros::Time::now();
         //one message per update, This is 2 since thre are 2 joints which are updated 
         //at the same time
         joint_state.name = {"joint1","joint2"};
+
+        int joint1_pos = (rand()%4);
+        int joint2_pos = (rand()%4);
+        
         //position-angle of rotation
-        joint_state.position = {joint1_pos,joint2_pos};
+        joint_state.position = {0,0}; //{joint1_pos,joint2_pos};
 
         //actually publishing data
         std_msgs::String msg;
