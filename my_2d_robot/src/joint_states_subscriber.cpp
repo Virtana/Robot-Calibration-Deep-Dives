@@ -10,7 +10,7 @@ int main (int argc, char **argv){
 
     ros::init(argc, argv, "joint_states_subscriber");
     ros::NodeHandle n;
-    ros::Subscriber sub = n.subscribe("joint_states", joint_statesCallback);
+    ros::Subscriber sub = n.subscribe("joint_states", 1000, joint_statesCallback);
 
     ros::spin();
 

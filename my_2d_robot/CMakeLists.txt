@@ -133,9 +133,10 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_node src/my_2d_robo_state_publisher.cpp)
-
+#For publisher:
 #add_executable(${PROJECT_NAME}_node src/my_2d_robo_state_publisher.cpp)
+
+
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -151,8 +152,16 @@ add_executable(${PROJECT_NAME}_node src/my_2d_robo_state_publisher.cpp)
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+#For publisher:
+#target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
+#PUBLISHER NODE 
+add_executable(${PROJECT_NAME}_node src/my_2d_robo_state_publisher.cpp)
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
+
+#SUBSCRIBER NODE
+add_executable(${PROJECT_NAME}_subscriber src/joint_states_subscriber.cpp)
+target_link_libraries(${PROJECT_NAME}_subscriber ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -211,8 +220,5 @@ target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 
-#not sure if this is needed
-#add_executable(state_publisher state_publisher/my_2d_robo_state_publisher.cpp)
 
-target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
