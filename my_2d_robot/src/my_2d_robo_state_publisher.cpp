@@ -24,7 +24,7 @@ int main(int argc, char** argv){
         //position-angle of rotation
         joint_state.position = {joint1_pos,joint2_pos};
 
-        //idk what this does..........
+        //actually publishing data
         std_msgs::String msg;
         ROS_INFO("%s", msg.data.c_str());
  

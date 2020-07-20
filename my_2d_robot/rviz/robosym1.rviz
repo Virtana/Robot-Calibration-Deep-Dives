@@ -102,7 +102,11 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        base:
+          Value: true
         endlink:
+          Value: true
+        link1:
           Value: true
         link2:
           Value: true
@@ -112,9 +116,11 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        link2:
-          endlink:
-            {}
+        base:
+          link1:
+            link2:
+              endlink:
+                {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -145,7 +151,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 2.0648770332336426
+      Distance: 18.795654296875
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -160,10 +166,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: -0.04960104823112488
+      Pitch: -0.5147973299026489
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.033580780029297
+      Yaw: 4.908583641052246
     Saved: ~
 Window Geometry:
   Displays:
@@ -182,4 +188,4 @@ Window Geometry:
     collapsed: false
   Width: 1200
   X: 98
-  Y: 78
+  Y: 48
