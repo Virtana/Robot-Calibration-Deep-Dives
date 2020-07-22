@@ -11,6 +11,7 @@ project(my_2d_robot)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
+  genmsg
 )
 
 ## System dependencies are found with CMake's conventions
@@ -73,6 +74,7 @@ find_package(catkin REQUIRED COMPONENTS
 #   std_msgs
 # )
 
+
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
 ################################################
@@ -105,7 +107,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
  INCLUDE_DIRS include
  LIBRARIES my_2d_robot
- CATKIN_DEPENDS roscpp std_msgs
+ CATKIN_DEPENDS roscpp std_msgs genmsg
 #  DEPENDS system_lib
 )
 
@@ -159,9 +161,11 @@ include_directories(
 add_executable(${PROJECT_NAME}_node src/my_2d_robo_state_publisher.cpp)
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
+
 #SUBSCRIBER NODE
 add_executable(${PROJECT_NAME}_subscriber_node src/joint_states_subscriber.cpp)
 target_link_libraries(${PROJECT_NAME}_subscriber_node ${catkin_LIBRARIES})
+
 
 #############
 ## Install ##
@@ -219,6 +223,7 @@ target_link_libraries(${PROJECT_NAME}_subscriber_node ${catkin_LIBRARIES})
 # catkin_add_nosetests(test)
 
 include_directories(include ${catkin_INCLUDE_DIRS})
+
 
 
 
