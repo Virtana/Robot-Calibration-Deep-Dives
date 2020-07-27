@@ -2,6 +2,8 @@
 #include "std_msgs/String.h"
 #include <sensor_msgs/JointState.h>
 #include <string>
+#include "yaml-cpp/yaml.h"
+#include "ros/package.h"
 
 class states
 {
@@ -26,9 +28,10 @@ public:
   // Method to calculate the position of the end effector.
   void eepos();
   // Method to write joint state angles and enf effector position to yaml file
+  void save_yaml();
 
   // Contructor.
-  states(ros::NodeHandle *n)
+  states(ros::NodeHandle* n)
   {
     // Initialising length of links (specified in urdf).
     link_1 = 5.0;
@@ -40,7 +43,7 @@ public:
     n->getParam("Theta1_offset", Theta1_offset);
     n->getParam("Theta2_offset", Theta2_offset);
 
-    // Calculating the position of the end effector. 
+    // Calculating the position of the end effector.
     eepos();
   }
 };
@@ -57,17 +60,33 @@ void states::joint_statesCallback(const sensor_msgs::JointState::ConstPtr& msg)
 
 void states::eepos()
 {
-  // Joint angles received from state publisher node.
-  float Theta1_Measured = position_joint1;
-  float Theta2_Measured = position_joint2;
-
   // Including offsets to joint angles.
-  float Theta1 = Theta1_Measured - Theta1_offset;
-  float Theta2 = Theta2_Measured - Theta2_offset;
+  float Theta1 = position_joint1 - Theta1_offset;
+  float Theta2 = position_joint2 - Theta2_offset;
 
   // Calculating the end effector position.
   x = (link_1 * cos(Theta1 * M_PI / 180)) + (link_2 * cos((Theta1 + Theta2) * M_PI / 180));
   y = (link_1 * sin(Theta1 * M_PI / 180)) + (link_2 * sin((Theta1 + Theta2) * M_PI / 180));
+}
+
+void states::save_yaml()
+{
+  YAML::Emitter output;
+  output << YAML::BeginMap;
+  output << YAML::Key << "joint1 angle";
+  output << YAML::Value << "position_joint1";
+  output << YAML::Key << "joint2 angle";
+  output << YAML::Value << "position_joint2";
+  output << YAML::Key << "end effector x position";
+  output << YAML::Value << "x"; 
+  output << YAML::Key << "end effector y position";
+  output << YAML::Value << "y"; 
+  output << YAML::EndMap;
+
+  filename = ros::package::getPath("robot_calibration");
+
+  std::ofstream fout("filename.yaml");
+  fout << output.c_str();
 }
 
 // Main function.
