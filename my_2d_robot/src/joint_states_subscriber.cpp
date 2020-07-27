@@ -2,6 +2,7 @@
 #include "std_msgs/String.h"
 #include <sensor_msgs/JointState.h>
 #include <string>
+#include <fstream>
 #include "yaml-cpp/yaml.h"
 #include "ros/package.h"
 
@@ -71,22 +72,24 @@ void states::eepos()
 
 void states::save_yaml()
 {
-  YAML::Emitter output;
-  output << YAML::BeginMap;
-  output << YAML::Key << "joint1 angle";
-  output << YAML::Value << "position_joint1";
-  output << YAML::Key << "joint2 angle";
-  output << YAML::Value << "position_joint2";
-  output << YAML::Key << "end effector x position";
-  output << YAML::Value << "x"; 
-  output << YAML::Key << "end effector y position";
-  output << YAML::Value << "y"; 
-  output << YAML::EndMap;
+  YAML::Emitter d_output;
+  d_output << YAML::BeginMap;
+  d_output << YAML::Key << "joint1 angle";
+  d_output << YAML::Value << std::to_string(position_joint1);
+  d_output << YAML::Key << "joint2 angle";
+  d_output << YAML::Value << std::to_string(position_joint2);
+  d_output << YAML::Key << "end effector x position";
+  d_output << YAML::Value << std::to_string(x);
+  d_output << YAML::Key << "end effector y position";
+  d_output << YAML::Value << std::to_string(y);
+  d_output << YAML::EndMap;
 
-  filename = ros::package::getPath("robot_calibration");
+  std::string my_output = ros::package::getPath("my_2d_robot/Output_yaml");
 
-  std::ofstream fout("filename.yaml");
-  fout << output.c_str();
+  std::ofstream fout;
+  fout.open("my_output.yaml", std::ios_base::app);
+  fout << d_output.c_str();
+  fout.close();
 }
 
 // Main function.

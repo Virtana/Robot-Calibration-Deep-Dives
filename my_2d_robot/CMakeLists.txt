@@ -10,7 +10,9 @@ project(my_2d_robot)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  roslib
   std_msgs
+  sensor_msgs
   genmsg
 )
 
@@ -107,7 +109,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
  INCLUDE_DIRS include
  LIBRARIES my_2d_robot
- CATKIN_DEPENDS roscpp std_msgs genmsg
+ CATKIN_DEPENDS roscpp roslib std_msgs sensor_msgs genmsg
 #  DEPENDS system_lib
 )
 
@@ -164,7 +166,9 @@ target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
 #SUBSCRIBER NODE
 add_executable(${PROJECT_NAME}_subscriber_node src/joint_states_subscriber.cpp)
-target_link_libraries(${PROJECT_NAME}_subscriber_node ${catkin_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}_subscriber_node yaml-cpp ${catkin_LIBRARIES})
+
+FIND_PACKAGE(yaml-cpp REQUIRED)
 
 
 #############
