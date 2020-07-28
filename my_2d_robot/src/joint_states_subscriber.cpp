@@ -45,7 +45,7 @@ public:
     n->getParam("Theta2_offset", Theta2_offset);
 
     // Calculating the position of the end effector.
-    eepos();
+    //eepos();
   }
 };
 
@@ -57,6 +57,11 @@ void states::joint_statesCallback(const sensor_msgs::JointState::ConstPtr& msg)
 
   position_joint1 = msg->position[0];
   position_joint2 = msg->position[1];
+
+  //experiment
+  eepos();
+
+  save_yaml();
 }
 
 void states::eepos()
@@ -84,10 +89,13 @@ void states::save_yaml()
   d_output << YAML::Value << std::to_string(y);
   d_output << YAML::EndMap;
 
-  std::string my_output = ros::package::getPath("my_2d_robot/Output_yaml");
+  std::string my_output = ros::package::getPath("my_2d_robot");
 
   std::ofstream fout;
-  fout.open("my_output.yaml", std::ios_base::app);
+  fout.open("/home/rebecca/catkin_ws/src/Robot-Calibration-Deep-Dives-RG/my_2d_robot/Output_yaml/my_output.yaml", std::fstream::app); //ios_base
+  if (!fout) {
+    ROS_ERROR("error");
+  }
   fout << d_output.c_str();
   fout.close();
 }
@@ -99,7 +107,7 @@ int main(int argc, char** argv)
   ros::NodeHandle n;
 
   states my_2d_robo_states = states(&n);
-
+  //my_2d_robo_states.save_yaml();
   ros::spin();
 
   return 0;
