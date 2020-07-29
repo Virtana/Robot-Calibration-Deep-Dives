@@ -91,21 +91,24 @@ void states::save_yaml()
   d_output << YAML::EndMap;
 
   std::string my_output = ros::package::getPath("my_2d_robot");
+  my_output.append("/da_output.yaml");
+
+  // for testing
 
   std::stringstream stream;
+  // stream<<d_output<<std::endl;
 
   std::ofstream fout;
-  fout.open("m_output.yaml", std::fstream::app);
+  fout.open(my_output, std::fstream::app);
 
   if (!fout)
   {
     ROS_ERROR("error");
   }
 
-  //testing
+  // testing
   fout << d_output.c_str();
-
-
+  // fout << stream.rdbuf();
   fout.close();
 }
 
