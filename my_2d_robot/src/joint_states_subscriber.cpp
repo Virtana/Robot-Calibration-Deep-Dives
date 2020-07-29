@@ -3,6 +3,7 @@
 #include <sensor_msgs/JointState.h>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include "yaml-cpp/yaml.h"
 #include "ros/package.h"
 
@@ -35,8 +36,8 @@ public:
   states(ros::NodeHandle* n)
   {
     // Initialising length of links (specified in urdf).
-    link_1 = 5.0;
-    link_2 = 5.0;
+    link_1 = 1.0;
+    link_2 = 2.0;
 
     sub = n->subscribe("joint_states", 1000, &states::joint_statesCallback, this);
 
@@ -45,7 +46,7 @@ public:
     n->getParam("Theta2_offset", Theta2_offset);
 
     // Calculating the position of the end effector.
-    //eepos();
+    // eepos();
   }
 };
 
@@ -58,7 +59,7 @@ void states::joint_statesCallback(const sensor_msgs::JointState::ConstPtr& msg)
   position_joint1 = msg->position[0];
   position_joint2 = msg->position[1];
 
-  //experiment
+  // experiment
   eepos();
 
   save_yaml();
@@ -91,12 +92,20 @@ void states::save_yaml()
 
   std::string my_output = ros::package::getPath("my_2d_robot");
 
+  std::stringstream stream;
+
   std::ofstream fout;
-  fout.open("/home/rebecca/catkin_ws/src/Robot-Calibration-Deep-Dives-RG/my_2d_robot/Output_yaml/my_output.yaml", std::fstream::app); //ios_base
-  if (!fout) {
+  fout.open("m_output.yaml", std::fstream::app);
+
+  if (!fout)
+  {
     ROS_ERROR("error");
   }
+
+  //testing
   fout << d_output.c_str();
+
+
   fout.close();
 }
 
@@ -107,7 +116,7 @@ int main(int argc, char** argv)
   ros::NodeHandle n;
 
   states my_2d_robo_states = states(&n);
-  //my_2d_robo_states.save_yaml();
+  // my_2d_robo_states.save_yaml();
   ros::spin();
 
   return 0;

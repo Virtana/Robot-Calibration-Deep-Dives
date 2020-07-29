@@ -1,6 +1,7 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
 #include "std_msgs/String.h"
@@ -24,8 +25,8 @@ int main(int argc, char** argv)
     joint_state.header.stamp = ros::Time::now();
 
     // Randomly generating values in the range [0,2*PI].
-    float joint1_pos = ((rand() % (2 * 315)) / 100.0);
-    float joint2_pos = ((rand() % (2 * 315)) / 100.0);
+    float joint1_pos = 0.0; //((rand() % (2 * 315)) / 100.0);
+    float joint2_pos = 0.0; //((rand() % (2 * 315)) / 100.0);
 
     // There is one message per update. This is 2 since 2 joints are updated at a time.
     // The position is the angle of rotation.

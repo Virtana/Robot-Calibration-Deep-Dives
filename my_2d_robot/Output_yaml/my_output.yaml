@@ -33883,4 +33883,352 @@ end effector x position: 9.848607
 end effector y position: -1.705576joint1 angle: 3.030000
 joint2 angle: 1.280000
 end effector x position: 9.876275
-end effector y position: -1.534224
+end effector y position: -1.534224joint1 angle: 0.230000
+joint2 angle: 1.580000
+end effector x position: 9.795578
+end effector y position: -1.989372joint1 angle: 1.510000
+joint2 angle: 1.070000
+end effector x position: 9.828195
+end effector y position: -1.813565joint1 angle: 1.360000
+joint2 angle: 4.550000
+end effector x position: 9.880466
+end effector y position: -1.541057joint1 angle: 0.030000
+joint2 angle: 3.620000
+end effector x position: 9.826709
+end effector y position: -1.849672joint1 angle: 0.600000
+joint2 angle: 4.150000
+end effector x position: 9.853065
+end effector y position: -1.706347joint1 angle: 5.940000
+joint2 angle: 2.030000
+end effector x position: 9.949863
+end effector y position: -0.965950joint1 angle: 1.660000
+joint2 angle: 2.690000
+end effector x position: 9.860996
+end effector y position: -1.649280joint1 angle: 4.750000
+joint2 angle: 0.080000
+end effector x position: 9.900466
+end effector y position: -1.340355joint1 angle: 5.230000
+joint2 angle: 5.690000
+end effector x position: 9.970011
+end effector y position: -0.771527joint1 angle: 1.330000
+joint2 angle: 4.080000
+end effector x position: 9.872991
+end effector y position: -1.586699joint1 angle: 4.100000
+joint2 angle: 2.530000
+end effector x position: 9.920258
+end effector y position: -1.241788joint1 angle: 2.910000
+joint2 angle: 0.030000
+end effector x position: 9.851414
+end effector y position: -1.661821joint1 angle: 1.920000
+joint2 angle: 1.400000
+end effector x position: 9.846831
+end effector y position: -1.715006joint1 angle: 3.760000
+joint2 angle: 6.130000
+end effector x position: 9.950504
+end effector y position: -0.988807joint1 angle: 6.090000
+joint2 angle: 2.580000
+end effector x position: 9.957879
+end effector y position: -0.892221joint1 angle: 5.520000
+joint2 angle: 0.020000
+end effector x position: 9.916726
+end effector y position: -1.212351joint1 angle: 4.160000
+joint2 angle: 0.740000
+end effector x position: 9.896565
+end effector y position: -1.385588joint1 angle: 6.120000
+joint2 angle: 4.240000
+end effector x position: 9.972153
+end effector y position: -0.742809joint1 angle: 4.010000
+joint2 angle: 4.870000
+end effector x position: 9.944204
+end effector y position: -1.054830joint1 angle: 1.560000
+joint2 angle: 4.610000
+end effector x position: 9.886591
+end effector y position: -1.501384joint1 angle: 2.720000
+joint2 angle: 6.230000
+end effector x position: 9.931845
+end effector y position: -1.160573joint1 angle: 5.370000
+joint2 angle: 3.100000
+end effector x position: 9.951246
+end effector y position: -0.972221joint1 angle: 2.240000
+joint2 angle: 5.830000
+end effector x position: 9.917684
+end effector y position: -1.278403joint1 angle: 2.970000
+joint2 angle: 6.180000
+end effector x position: 9.936372
+end effector y position: -1.121567joint1 angle: 0.430000
+joint2 angle: 4.100000
+end effector x position: 9.847167
+end effector y position: -1.739866joint1 angle: 4.110000
+joint2 angle: 1.190000
+end effector x position: 9.902121
+end effector y position: -1.355541joint1 angle: 5.290000
+joint2 angle: 4.200000
+end effector x position: 9.960012
+end effector y position: -0.890660joint1 angle: 5.660000
+joint2 angle: 0.790000
+end effector x position: 9.930096
+end effector y position: -1.121737joint1 angle: 1.700000
+joint2 angle: 4.470000
+end effector x position: 9.888370
+end effector y position: -1.489297joint1 angle: 5.840000
+joint2 angle: 4.450000
+end effector x position: 9.969942
+end effector y position: -0.773272joint1 angle: 4.270000
+joint2 angle: 1.110000
+end effector x position: 9.904706
+end effector y position: -1.334768joint1 angle: 2.790000
+joint2 angle: 5.150000
+end effector x position: 9.922554
+end effector y position: -1.242075joint1 angle: 1.020000
+joint2 angle: 1.930000
+end effector x position: 9.828544
+end effector y position: -1.824274joint1 angle: 5.440000
+joint2 angle: 1.140000
+end effector x position: 9.930280
+end effector y position: -1.129657joint1 angle: 0.990000
+joint2 angle: 4.810000
+end effector x position: 9.873986
+end effector y position: -1.582440joint1 angle: 0.710000
+joint2 angle: 5.250000
+end effector x position: 9.872313
+end effector y position: -1.592778joint1 angle: 5.330000
+joint2 angle: 0.760000
+end effector x position: 9.923065
+end effector y position: -1.181497joint1 angle: 5.070000
+joint2 angle: 1.270000
+end effector x position: 9.924499
+end effector y position: -1.182546joint1 angle: 5.310000
+joint2 angle: 0.460000
+end effector x position: 9.918520
+end effector y position: -1.210813joint1 angle: 1.150000
+joint2 angle: 5.740000
+end effector x position: 9.890468
+end effector y position: -1.474611joint1 angle: 4.570000
+joint2 angle: 3.990000
+end effector x position: 9.946012
+end effector y position: -1.033961joint1 angle: 0.630000
+joint2 angle: 2.280000
+end effector x position: 9.822387
+end effector y position: -1.861286joint1 angle: 0.610000
+joint2 angle: 5.020000
+end effector x position: 9.866291
+end effector y position: -1.629816joint1 angle: 1.790000
+joint2 angle: 2.310000
+end effector x position: 9.858550
+end effector y position: -1.659486joint1 angle: 3.190000
+joint2 angle: 1.330000
+end effector x position: 9.881316
+end effector y position: -1.502348joint1 angle: 0.470000
+joint2 angle: 6.180000
+end effector x position: 9.877993
+end effector y position: -1.553918joint1 angle: 2.450000
+joint2 angle: 1.980000
+end effector x position: 9.871811
+end effector y position: -1.574140joint1 angle: 5.030000
+joint2 angle: 3.470000
+end effector x position: 9.949060
+end effector y position: -0.999187joint1 angle: 0.280000
+joint2 angle: 1.200000
+end effector x position: 9.789665
+end effector y position: -2.013091joint1 angle: 1.890000
+joint2 angle: 5.250000
+end effector x position: 9.903021
+end effector y position: -1.389135joint1 angle: 2.130000
+joint2 angle: 0.560000
+end effector x position: 9.837949
+end effector y position: -1.750634joint1 angle: 5.130000
+joint2 angle: 0.350000
+end effector x position: 9.913089
+end effector y position: -1.251436joint1 angle: 5.190000
+joint2 angle: 4.930000
+end effector x position: 9.964267
+end effector y position: -0.844604joint1 angle: 2.770000
+joint2 angle: 0.480000
+end effector x position: 9.855472
+end effector y position: -1.647472joint1 angle: 0.370000
+joint2 angle: 3.830000
+end effector x position: 9.840980
+end effector y position: -1.773332joint1 angle: 6.200000
+joint2 angle: 5.500000
+end effector x position: 9.980717
+end effector y position: -0.619190joint1 angle: 2.870000
+joint2 angle: 2.190000
+end effector x position: 9.886281
+end effector y position: -1.483689joint1 angle: 1.390000
+joint2 angle: 2.220000
+end effector x position: 9.845180
+end effector y position: -1.735971joint1 angle: 0.420000
+joint2 angle: 1.760000
+end effector x position: 9.805631
+end effector y position: -1.941567joint1 angle: 3.670000
+joint2 angle: 2.780000
+end effector x position: 9.913949
+end effector y position: -1.294636joint1 angle: 0.120000
+joint2 angle: 2.030000
+end effector x position: 9.800625
+end effector y position: -1.969923joint1 angle: 6.140000
+joint2 angle: 4.010000
+end effector x position: 9.970755
+end effector y position: -0.759331joint1 angle: 2.770000
+joint2 angle: 2.960000
+end effector x position: 9.894946
+end effector y position: -1.434699joint1 angle: 1.650000
+joint2 angle: 1.770000
+end effector x position: 9.845224
+end effector y position: -1.729778joint1 angle: 2.890000
+joint2 angle: 2.260000
+end effector x position: 9.887847
+end effector y position: -1.474220joint1 angle: 5.740000
+joint2 angle: 5.020000
+end effector x position: 9.972502
+end effector y position: -0.741085joint1 angle: 2.820000
+joint2 angle: 4.570000
+end effector x position: 9.916754
+end effector y position: -1.287082joint1 angle: 4.090000
+joint2 angle: 0.440000
+end effector x position: 9.890175
+end effector y position: -1.423434joint1 angle: 1.930000
+joint2 angle: 5.590000
+end effector x position: 9.907938
+end effector y position: -1.352815joint1 angle: 0.920000
+joint2 angle: 1.020000
+end effector x position: 9.808015
+end effector y position: -1.918923joint1 angle: 1.840000
+joint2 angle: 5.840000
+end effector x position: 9.908628
+end effector y position: -1.346744joint1 angle: 5.240000
+joint2 angle: 4.720000
+end effector x position: 9.963423
+end effector y position: -0.854167joint1 angle: 1.730000
+joint2 angle: 5.350000
+end effector x position: 9.900313
+end effector y position: -1.408142joint1 angle: 5.660000
+joint2 angle: 0.870000
+end effector x position: 9.931129
+end effector y position: -1.114832joint1 angle: 0.810000
+joint2 angle: 3.030000
+end effector x position: 9.841273
+end effector y position: -1.766292joint1 angle: 3.660000
+joint2 angle: 5.960000
+end effector x position: 9.947394
+end effector y position: -1.020945joint1 angle: 3.790000
+joint2 angle: 3.500000
+end effector x position: 9.925460
+end effector y position: -1.211660joint1 angle: 3.670000
+joint2 angle: 5.280000
+end effector x position: 9.941669
+end effector y position: -1.078255joint1 angle: 5.180000
+joint2 angle: 4.040000
+end effector x position: 9.956898
+end effector y position: -0.923674joint1 angle: 0.750000
+joint2 angle: 1.770000
+end effector x position: 9.816839
+end effector y position: -1.884207joint1 angle: 5.020000
+joint2 angle: 0.200000
+end effector x position: 9.908462
+end effector y position: -1.283368joint1 angle: 0.490000
+joint2 angle: 1.550000
+end effector x position: 9.803918
+end effector y position: -1.947453joint1 angle: 3.490000
+joint2 angle: 3.310000
+end effector x position: 9.916641
+end effector y position: -1.280028joint1 angle: 0.710000
+joint2 angle: 4.140000
+end effector x position: 9.856169
+end effector y position: -1.688287joint1 angle: 2.600000
+joint2 angle: 1.630000
+end effector x position: 9.870282
+end effector y position: -1.578313joint1 angle: 5.170000
+joint2 angle: 4.440000
+end effector x position: 9.960136
+end effector y position: -0.890671joint1 angle: 1.170000
+joint2 angle: 4.110000
+end effector x position: 9.868963
+end effector y position: -1.611683joint1 angle: 1.580000
+joint2 angle: 1.620000
+end effector x position: 9.840444
+end effector y position: -1.754622joint1 angle: 3.170000
+joint2 angle: 5.960000
+end effector x position: 9.938299
+end effector y position: -1.105978joint1 angle: 2.490000
+joint2 angle: 2.700000
+end effector x position: 9.884001
+end effector y position: -1.505404joint1 angle: 2.700000
+joint2 angle: 6.150000
+end effector x position: 9.930696
+end effector y position: -1.170982joint1 angle: 2.360000
+joint2 angle: 5.210000
+end effector x position: 9.913632
+end effector y position: -1.311316joint1 angle: 2.070000
+joint2 angle: 6.030000
+end effector x position: 9.915974
+end effector y position: -1.290500joint1 angle: 4.190000
+joint2 angle: 0.960000
+end effector x position: 9.900610
+end effector y position: -1.361497joint1 angle: 2.490000
+joint2 angle: 3.660000
+end effector x position: 9.897583
+end effector y position: -1.422737joint1 angle: 2.730000
+joint2 angle: 1.220000
+end effector x position: 9.867105
+end effector y position: -1.591054joint1 angle: 2.580000
+joint2 angle: 1.950000
+end effector x position: 9.874882
+end effector y position: -1.554312joint1 angle: 1.490000
+joint2 angle: 6.080000
+end effector x position: 9.902968
+end effector y position: -1.386484joint1 angle: 5.260000
+joint2 angle: 2.200000
+end effector x position: 9.939667
+end effector y position: -1.069263joint1 angle: 3.920000
+joint2 angle: 0.280000
+end effector x position: 9.883311
+end effector y position: -1.466491joint1 angle: 2.550000
+joint2 angle: 1.510000
+end effector x position: 9.866924
+end effector y position: -1.597209joint1 angle: 3.440000
+joint2 angle: 2.440000
+end effector x position: 9.904057
+end effector y position: -1.363732joint1 angle: 4.350000
+joint2 angle: 3.750000
+end effector x position: 9.939496
+end effector y position: -1.092941joint1 angle: 4.060000
+joint2 angle: 6.240000
+end effector x position: 9.956341
+end effector y position: -0.927127joint1 angle: 3.410000
+joint2 angle: 5.270000
+end effector x position: 9.936577
+end effector y position: -1.124225joint1 angle: 2.640000
+joint2 angle: 4.830000
+end effector x position: 9.915686
+end effector y position: -1.295743joint1 angle: 3.850000
+joint2 angle: 5.010000
+end effector x position: 9.942542
+end effector y position: -1.070450joint1 angle: 3.740000
+joint2 angle: 5.920000
+end effector x position: 9.948486
+end effector y position: -1.010530joint1 angle: 4.740000
+joint2 angle: 0.350000
+end effector x position: 9.904342
+end effector y position: -1.318882joint1 angle: 0.580000
+joint2 angle: 0.940000
+end effector x position: 9.794832
+end effector y position: -1.983881joint1 angle: 4.020000
+joint2 angle: 2.040000
+end effector x position: 9.912049
+end effector y position: -1.297907joint1 angle: 0.880000
+joint2 angle: 0.300000
+end effector x position: 9.792048
+end effector y position: -1.986876joint1 angle: 3.990000
+joint2 angle: 2.370000
+end effector x position: 9.915777
+end effector y position: -1.274638joint1 angle: 5.100000
+joint2 angle: 1.670000
+end effector x position: 9.930234
+end effector y position: -1.142820joint1 angle: 4.570000
+joint2 angle: 1.450000
+end effector x position: 9.916277
+end effector y position: -1.253596joint1 angle: 0.670000
+joint2 angle: 0.820000
+end effector x position: 9.795501
+end effector y position: -1.978678
