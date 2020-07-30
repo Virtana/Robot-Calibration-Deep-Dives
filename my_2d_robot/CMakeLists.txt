@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
+# Name of project
 project(my_2d_robot)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
@@ -102,10 +103,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES my_2d_robot
-#  CATKIN_DEPENDS roscpp std_msgs
-#  DEPENDS system_lib
+# INCLUDE_DIRS include
+ LIBRARIES my_2d_robot
+ CATKIN_DEPENDS roscpp std_msgs
+# DEPENDS system_lib
 )
 
 ###########
@@ -115,7 +116,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -132,7 +133,6 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/my_2d_robot_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -148,6 +148,14 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+
+# PUBLISHER NODE 
+add_executable(${PROJECT_NAME}_node src/my_2d_robo_state_publisher.cpp)
+target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
+
+# SUBSCRIBER NODE
+add_executable(${PROJECT_NAME}_subscriber_node src/joint_states_subscriber.cpp)
+target_link_libraries(${PROJECT_NAME}_subscriber_node ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -185,11 +193,11 @@ include_directories(
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
-# install(FILES
+ install(FILES
 #   # myfile1
 #   # myfile2
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-# )
+)
 
 #############
 ## Testing ##
@@ -205,5 +213,3 @@ include_directories(
 # catkin_add_nosetests(test)
 
 include_directories(include ${catkin_INCLUDE_DIRS})
-add_executable(state_publisher state_publisher/my_2d_robo_state_publisher.cpp)
-target_link_libraries(state_publisher ${catkin_LIBRARIES})

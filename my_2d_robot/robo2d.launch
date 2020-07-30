@@ -1,6 +1,8 @@
 <launch>
-        <param name="my2drobo" command="cat $(find my_2d_robot)/package.xml" />
-        <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
-        <node name="my_2d_robo_state_publisher" pkg="my_2d_robot" type="state_publisher" />
-        </launch>
-        
+        <param name="robot_description" command="cat $(find my_2d_robot)/urdf/my2drobo.urdf" />
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+        <node name="my_2d_robo_state_publisher" pkg="my_2d_robot" type="my_2d_robot_node" />
+        <param name="loop_rate" type="double" value="2.0" />
+        <node type="rviz" name="rviz" pkg="rviz" args="-d $(find my_2d_robot)/rviz/robosym1.rviz"/>
+</launch>
+  
