@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <boost/filesystem.hpp>
 #include "yaml-cpp/yaml.h"
 #include "ros/package.h"
 
@@ -36,17 +37,14 @@ public:
   states(ros::NodeHandle* n)
   {
     // Initialising length of links (specified in urdf).
-    link_1 = 1.0;
-    link_2 = 2.0;
+    link_1 = 5.0;
+    link_2 = 5.0;
 
     sub = n->subscribe("joint_states", 1000, &states::joint_statesCallback, this);
 
     // Getting the joint angle offsets which are set in the launch file.
     n->getParam("Theta1_offset", Theta1_offset);
     n->getParam("Theta2_offset", Theta2_offset);
-
-    // Calculating the position of the end effector.
-    // eepos();
   }
 };
 
@@ -59,7 +57,7 @@ void states::joint_statesCallback(const sensor_msgs::JointState::ConstPtr& msg)
   position_joint1 = msg->position[0];
   position_joint2 = msg->position[1];
 
-  // experiment
+  // Calculating the position of the end effector.
   eepos();
 
   save_yaml();
@@ -90,11 +88,23 @@ void states::save_yaml()
   d_output << YAML::Value << std::to_string(y);
   d_output << YAML::EndMap;
 
+  // Get the package filepath.
   std::string my_output = ros::package::getPath("my_2d_robot");
-  my_output.append("/da_output.yaml");
+ 
+  //Check if Output_yaml folder exists in package.
+  std::string check = my_output.append("/Output_yaml");
+
+  // Create folder if it does not already exist.
+  if (!(boost::filesystem::exists(check)))
+  {
+    boost::filesystem::create_directory(check);
+  }
+
+  //Amend filepath for storing yaml file.
+  my_output = check;
+  my_output.append("/my_output.yaml");
 
   // for testing
-
   std::stringstream stream;
   // stream<<d_output<<std::endl;
 
@@ -119,7 +129,7 @@ int main(int argc, char** argv)
   ros::NodeHandle n;
 
   states my_2d_robo_states = states(&n);
-  // my_2d_robo_states.save_yaml();
+
   ros::spin();
 
   return 0;
