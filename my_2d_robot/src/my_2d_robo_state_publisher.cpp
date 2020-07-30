@@ -11,7 +11,7 @@ int main(int argc, char** argv)
   ros::NodeHandle n;
   ros::Publisher joint_pub = n.advertise<sensor_msgs::JointState>("joint_states", 1000);
     
-  // Getting the loop rate set in the launch file and sending it to ros::rate to set the rate at which the joint angles change.
+  // Gets the loop rate set in the launch file and sends it to ros::rate to set the rate at which the joint angles change.
   double loop_rate = n.getParam("loop_rate", loop_rate);
   ros::Rate my_loop_rate(loop_rate);
 
@@ -23,7 +23,7 @@ int main(int argc, char** argv)
   {
     joint_state.header.stamp = ros::Time::now();
 
-    // Randomly generating values in the range [0,2*PI].
+    // Randomly generates values in the range [0,2*PI].
     float joint1_pos = ((rand() % (2 * 315)) / 100.0);
     float joint2_pos = ((rand() % (2 * 315)) / 100.0);
 
@@ -34,7 +34,7 @@ int main(int argc, char** argv)
     joint_state.name = { "joint1", "joint2" };
     joint_state.position = { joint1_pos, joint2_pos };
 
-    // Outputting data to stdout.
+    // Outputs data to stdout.
     std_msgs::String msg;
     ROS_INFO("%F", joint_state.position[0]);
 
