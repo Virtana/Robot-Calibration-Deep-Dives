@@ -7,6 +7,8 @@
 #include <sstream>
 #include <boost/filesystem.hpp>
 #include "yaml-cpp/yaml.h"
+#include "eigen3/Eigen/Dense"
+#include <eigen3/Eigen/Core>
 
 class SensorMeasurementData
 {
@@ -57,14 +59,17 @@ void SensorMeasurementData::joint_statesCallback(const sensor_msgs::JointState::
   position_joint1_ = msg->position[0];
   position_joint2_ = msg->position[1];
 
-  eePos(position_joint1_, position_joint2_);
+  Eigen::Vector2d eePos(position_joint1_, position_joint2_);
 
   saveYaml();
 }
 
 // Method to calculate the position of the end effector.
-void SensorMeasurementData::eePos(float joint_1, float joint_2)
+void SensorMeasurementData:: Eigen::Vector2d eePos(float joint_1, float joint_2)
 {
+  Eigen::typedef Matrix<float, 2, 1> Vector2f;
+  Vetor2f angle = Vector2f::Ones();
+
   // Includes the offsets for joint angles.
   float Theta1 = joint_1 - theta1_offset_;
   float Theta2 = joint_2 - theta2_offset_;
@@ -72,6 +77,8 @@ void SensorMeasurementData::eePos(float joint_1, float joint_2)
   // Calculates the end effector position.
   x_ = (link_1_ * cos(Theta1 * M_PI / 180)) + (link_2_ * cos((Theta1 + Theta2) * M_PI / 180));
   y_ = (link_1_ * sin(Theta1 * M_PI / 180)) + (link_2_ * sin((Theta1 + Theta2) * M_PI / 180));
+
+  return angle;
 }
 
 // Method to write the joint state angles and end effector position to yaml file.
