@@ -23,9 +23,9 @@ int main(int argc, char** argv)
   {
     joint_state.header.stamp = ros::Time::now();
 
-    // Randomly generates values in the range [0,2*PI].
-    float joint1_pos = ((rand() % (2 * 315)) / 100.0);
-    float joint2_pos = ((rand() % (2 * 315)) / 100.0);
+    // Randomly generates values in the range [0,360] degrees.
+    float joint1_pos = (rand() % 361);
+    float joint2_pos = (rand() % 361);
 
     // There is one message per update. This is 2 since 2 joints are updated at a time.
     joint_state.name.resize(2);
