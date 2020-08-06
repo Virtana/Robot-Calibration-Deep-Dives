@@ -108,10 +108,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
- INCLUDE_DIRS include
+ INCLUDE_DIRS include/${HEADER_FILES}
  LIBRARIES my_2d_robot
  CATKIN_DEPENDS roscpp roslib std_msgs sensor_msgs genmsg
-#  DEPENDS system_lib
+# DEPENDS system_lib
 )
 
 ###########
@@ -151,8 +151,6 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-#For publisher:
-#target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
 # PUBLISHER NODE 
 add_executable(${PROJECT_NAME}_node src/my_2d_robo_state_publisher.cpp)
