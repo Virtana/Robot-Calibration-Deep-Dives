@@ -122,6 +122,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
   ${catkin_INCLUDE_DIRS}
+  ${CERES_INCLUDE_DIRS}  
 )
 
 ## Declare a C++ library
@@ -163,6 +164,11 @@ target_link_libraries(${PROJECT_NAME}_subscriber_node yaml-cpp ${catkin_LIBRARIE
 
 FIND_PACKAGE(yaml-cpp REQUIRED)
 
+# CALIBRATOR NODE
+add_executable(${PROJECT_NAME}_calibrator_node src/calibration_2d.cpp)
+target_link_libraries(${PROJECT_NAME}_calibrator_node ${CERES_LIBRARIES} ${catkin_LIBRARIES})
+
+FIND_PACKAGE(Ceres REQUIRED)
 
 #############
 ## Install ##
