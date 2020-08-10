@@ -124,6 +124,7 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
   ${CERES_INCLUDE_DIRS}  
 )
+include_directories(${EIGEN_INCLUDE_DIR})
 
 ## Declare a C++ library
  add_library(${PROJECT_NAME}

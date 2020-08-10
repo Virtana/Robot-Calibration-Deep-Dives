@@ -1,6 +1,5 @@
 #include "joint_states_subscriber.h"
 #include "ceres/ceres.h"
-#include <eigen3/Eigen/Dense>
 #include "glog/logging.h"
 #include "yaml-cpp/yaml.h"
 #include "ros/ros.h"
@@ -14,13 +13,15 @@ using ceres::Problem;
 using ceres::Solve;
 using ceres::Solver;
 
-const double angle_data[SensorMeasurementData::data_num_max_];
-const double position_data[SensorMeasurementData::data_num_max_];
+// const double angle_data[n.getParam("data_point_count", data_num_max_)];
+// const double position_data[n.getParam("data_point_count", data_num_max_)];
 
 struct ceresTestResidual
 {
   ceresTestResidual(double offset_joint1, double offset_joint2, double true_x, double true_y)
     : offset_joint1_(offset_joint1), offset_joint2_(offset_joint2), true_x_(true_x), true_y_(true_y)
+
+    
   {
   }
 
@@ -44,13 +45,19 @@ private:
   const double true_y_;
   const double offset_joint1_;
   const double offset_joint2_;
+  const double angle_data[];
+  const double position_data[];
 };
 
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "robo_2d_calibrator");
   ros::NodeHandle n;
-  
+
+  int data_num_max_;
+  const double angle_data[n.getParam("data_point_count", data_num_max_)];
+  const double position_data[n.getParam("data_point_count", data_num_max_)];
+
   google::InitGoogleLogging(argv[0]);
 
   double offset1 = 0.0;
