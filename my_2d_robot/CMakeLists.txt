@@ -166,13 +166,8 @@ target_link_libraries(${PROJECT_NAME}_subscriber_node yaml-cpp ${catkin_LIBRARIE
 
 # CALIBRATOR NODE
 add_executable(${PROJECT_NAME}_calibrator_node src/calibration_2d.cpp)
-target_link_libraries(${PROJECT_NAME}_calibrator_node yaml-cpp ${CERES_LIBRARIES} ${catkin_LIBRARIES})
-
-# CALIBRATOR NODE
-add_executable(${PROJECT_NAME}_calibrator_node src/calibration_2d.cpp)
 target_link_libraries(${PROJECT_NAME}_calibrator_node ${CERES_LIBRARIES} ${catkin_LIBRARIES})
 
-FIND_PACKAGE(Ceres REQUIRED)
 
 #############
 ## Install ##
