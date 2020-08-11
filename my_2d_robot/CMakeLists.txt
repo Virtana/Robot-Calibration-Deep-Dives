@@ -19,6 +19,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
+find_package(Ceres REQUIRED)
+find_package(yaml-cpp REQUIRED)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -158,18 +160,14 @@ include_directories(${EIGEN_INCLUDE_DIR})
 add_executable(${PROJECT_NAME}_node src/my_2d_robo_state_publisher.cpp)
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
-
 # SUBSCRIBER NODE
 add_executable(${PROJECT_NAME}_subscriber_node src/main.cpp src/joint_states_subscriber.cpp src/joint_states_subscriber.h)
 target_link_libraries(${PROJECT_NAME}_subscriber_node yaml-cpp ${catkin_LIBRARIES})
-
-FIND_PACKAGE(yaml-cpp REQUIRED)
 
 # CALIBRATOR NODE
 add_executable(${PROJECT_NAME}_calibrator_node src/calibration_2d.cpp)
 target_link_libraries(${PROJECT_NAME}_calibrator_node ${CERES_LIBRARIES} ${catkin_LIBRARIES})
 
-FIND_PACKAGE(Ceres REQUIRED)
 
 #############
 ## Install ##

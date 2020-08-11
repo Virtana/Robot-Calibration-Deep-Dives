@@ -3,8 +3,8 @@
         <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
         <node name="my_2d_robo_state_publisher" pkg="my_2d_robot" type="my_2d_robot_node" />
         <node name="joint_states_subscriber" pkg="my_2d_robot" type="my_2d_robot_subscriber_node" />
-        <param name="Theta1_offset" type="double" value ="10.0" />
-        <param name="Theta2_offset" type="double" value ="5.0" />  
+        <param name="Theta1_offset" type="double" value ="0.255" />
+        <param name="Theta2_offset" type="double" value ="1.342" />  
         <param name="link_1" type="double" value ="5.0" /> 
         <param name="link_2" type="double" value ="5.0" /> 
         <param name="loop_rate" type="double" value="10.0" />

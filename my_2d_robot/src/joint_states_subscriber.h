@@ -36,6 +36,7 @@ private:
   Eigen::Vector2d eePos(double joint_1, double joint_2);
 
   ros::Subscriber sub_;
+  friend struct OffsetCalibration;
   // Joint positions.
   double position_joint1_;
   double position_joint2_;
