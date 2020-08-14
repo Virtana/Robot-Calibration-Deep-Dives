@@ -36,7 +36,7 @@ private:
   Eigen::Vector2d eePos(double joint_1, double joint_2);
 
   ros::Subscriber sub_;
-  friend struct OffsetCalibration;
+
   // Joint positions.
   double position_joint1_;
   double position_joint2_;
@@ -54,55 +54,5 @@ private:
   int data_count_;
   int data_num_max_;
 };
-
-
-// Method to get the joint state information from publisher node.
-void SensorMeasurementData::jointStatesCallback(const sensor_msgs::JointState::ConstPtr& msg)
-{
-  ROS_INFO("I heard: [%F]", msg->position[0]);
-
-  position_joint1_ = msg->position[0];
-  position_joint2_ = msg->position[1];
-
-  // Vector to store the end effector position.
-  Vector2d ee_position_;
-  ee_position_ = eePos(position_joint1_, position_joint2_);
-
-  std::ofstream fout;
-  fout.open(my_output_);
-  if (!fout)
-  {
-    ROS_ERROR("error");
-  }
-
-  std::stringstream stream;
-  output_data_yaml_.append(saveJointAnglesEepos(ee_position_));
-  data_count_ += 1;
-  stream << output_data_yaml_ << std::endl;
-  fout << stream.rdbuf();
-
-  if (data_count_ == data_num_max_)
-  {
-    ros::shutdown();
-  }
-}
-
-// Method to write the joint state angles and end effector position to yaml file.
-std::string SensorMeasurementData::saveJointAnglesEepos(Vector2d end_effector_position)
-{
-  std::string output_data_;
-  YAML::Emitter d_output;
-  d_output << YAML::BeginSeq;
-  d_output << YAML::BeginMap << YAML::Key << "joint angles" << YAML::Value << YAML::Flow << YAML::BeginSeq
-           << position_joint1_ << position_joint2_ << YAML::EndSeq;
-  d_output << YAML::Key << "end effector position" << YAML::Value << YAML::Flow << YAML::BeginSeq
-           << end_effector_position(0) << end_effector_position(1) << YAML::EndSeq << YAML::EndMap;
-  d_output << YAML::EndSeq;
-
-  output_data_.append(d_output.c_str());
-  output_data_.append("\n");
-
-  return output_data_;
-}
 
 #endif
