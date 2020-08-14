@@ -1,11 +1,10 @@
 #include "ceres/ceres.h"
 #include "glog/logging.h"
 #include "yaml-cpp/yaml.h"
-#include <eigen3/Eigen/Dense>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include <sensor_msgs/JointState.h>
-#include <fstream>
+#include <vector>
 
 using ceres::AutoDiffCostFunction;
 using ceres::CostFunction;
@@ -13,14 +12,9 @@ using ceres::Problem;
 using ceres::Solve;
 using ceres::Solver;
 
-const double data[] = { 3.35, 1.67, -9.797901586143452, -1.155660573741619,
-                        5.6,  4.82, -1.165389378872351, -1.201887463503331,
-                        0.9,  0.62, 8.980683656817739,  2.621372523970118,
-                        4.49, 1.04, -5.811532743938627, -7.997703675920208,
-                        5.7,  3.05, 6.568905982083914,  0.1038938918608614 };
-
 struct OffsetCalibration
 {
+public:
   OffsetCalibration(double offset_joint1, double offset_joint2, double true_x, double true_y)
     : true_x_(true_x), true_y_(true_y)
   {
@@ -28,7 +22,7 @@ struct OffsetCalibration
     ros::NodeHandle n;
     n.getParam("link_1", link1_);
     n.getParam("link_2", link2_);
-    //n.getParam("data_point_count", data_num_max_);
+
     // Joint angles including angle offsets.
     offset_joint1_ = offset_joint1;
     offset_joint2_ = offset_joint2;
@@ -50,89 +44,85 @@ struct OffsetCalibration
   }
 
 private:
+  // Accurate position of end effector.
   const double true_x_;
   const double true_y_;
+  // Offset joint angles.
   double offset_joint1_;
   double offset_joint2_;
+  // Link lengths.
   double link1_;
   double link2_;
-  //int data_num_max_;
+};
 
-  // void readYaml(ros::NodeHandle* n)
-  // {
-  //   int i = 0;
-  //   double angle_and_position_data[data_num_max_];
+// Function that reads yaml file containing joint angles and end effector position data, stores the data in vectors, and
+// uses ceres solver to calculate the joint angle offsets.
+void readYaml()
+{
+  // Filepath of file to use (specified in launch file).
+  std::string filepath;
+  // Number of data points written to yaml file by subscriber node.
+  int data_num_max_;
+  ros::NodeHandle n;
+  n.getParam("data_point_count", data_num_max_);
+  n.param<std::string>("file_path", filepath, "did not work this time");
 
-  // YAML::Node data_yaml = YAML::LoadFile("test.yaml");
-  // for (YAML::const_iterator iterator = data_yaml.begin(); iterator != data_yaml.end(); ++iterator)
-  // {
-  //   angle_and_position_data[i] = data_yaml[iterator].as<double>;
-  //   i++;
-  // }
+  // Vector to store the offset joint angles.
+  std::vector<double> angle_yaml;
+  // Vector to store end effector positions.
+  std::vector<double> position_yaml;
 
-  //     YAML::Node data_yaml = YAML::LoadFile("test.yaml");
-  //     for (YAML::const_iterator iterator = data_yaml.begin(); iterator != data_yaml.end(); ++iterator)
-  //     {
-  //       angle_and_position_data[i] = data_yaml[iterator].as<double>;
-  //       i++;
-  //     }
+  YAML::Node data_yaml = YAML::LoadFile(filepath);
 
-  //     // Initial values for joint angle offsets to be used in ceres cost function.
-  //     double offset1 = 0.0;
-  //     double offset2 = 0.0;
-  //     // Number of data readings written to yaml file (specified in launch file).
+  const YAML::Node& data = data_yaml["data"];
 
-  //     ceres::Problem problem;
-  //     for (int i = 0; i < data_num_max_; ++i)
-  //     {
-  //       problem.AddResidualBlock(new AutoDiffCostFunction<OffsetCalibration, 1, 1, 1>(new OffsetCalibration(
-  //                                    angle_and_position_data[4 * i], angle_and_position_data[4 * i + 1],
-  //                                    angle_and_position_data[4 * i + 2], angle_and_position_data[4 * i + 3])),
-  //                                NULL, &offset1, &offset2);
-  //     }
-
-  //     ceres::Solver::Options options;
-  //     options.linear_solver_type = ceres::DENSE_QR;
-  //     options.minimizer_progress_to_stdout = true;
-
-  //     ceres::Solver::Summary summary;
-  //     Solve(options, &problem, &summary);
-  //     std::cout << summary.BriefReport() << "\n";
-  //     std::cout << "offset1 : " << offset1 << "\n";
-  //     std::cout << "offset2 : " << offset2 << "\n";
-  //   }
-   };
-
-  int main(int argc, char** argv)
+  for (YAML::const_iterator it = data.begin(); it != data.end(); ++it)
   {
-    ros::init(argc, argv, "robo_2d_calibrator");
-    ros::NodeHandle n;
-    google::InitGoogleLogging(argv[0]);
+    const YAML::Node& reading = *it;
 
-    // Initial values for joint angle offsets to be used in ceres cost function.
-    double offset1 = 0.0;
-    double offset2 = 0.0;
-    // Number of data readings written to yaml file (specified in launch file).
-    int data_num_max;
-    n.getParam("data_point_count", data_num_max);
+    // Outputting. This works.
+    // std::cout << reading["joint angles"][0].as<double>() << std::endl;
+    // std::cout << reading["joint angles"][1].as<double>() << std::endl;
+    // std::cout << reading["end effector position"][0].as<double>() << std::endl;
+    // std::cout << reading["end effector position"][1].as<double>() << std::endl;
 
-    ceres::Problem problem;
-    for (int i = 0; i < data_num_max; ++i)
-    {
-      problem.AddResidualBlock(new AutoDiffCostFunction<OffsetCalibration, 1, 1, 1>(new OffsetCalibration(
-                                   data[4 * i], data[4 * i + 1], data[4 * i + 2], data[4 * i + 3])),
-                               NULL, &offset1, &offset2);
-    }
-
-    ceres::Solver::Options options;
-    options.linear_solver_type = ceres::DENSE_QR;
-    options.minimizer_progress_to_stdout = true;
-
-    ceres::Solver::Summary summary;
-    Solve(options, &problem, &summary);
-    std::cout << summary.BriefReport() << "\n";
-    std::cout << "offset1 : " << offset1 << "\n";
-    std::cout << "offset2 : " << offset2 << "\n";
-
-    return 0;
+    // Storing in vectors using for loop -- WORKSSSS.
+    angle_yaml.push_back(reading["joint_angles"][0].as<double>());
+    angle_yaml.push_back(reading["joint_angles"][1].as<double>());
+    position_yaml.push_back(reading["end_effector_position"][0].as<double>());
+    position_yaml.push_back(reading["end_effector_position"][1].as<double>());
   }
+
+  double offset1 = 0.992;
+  double offset2 = 0.555;
+
+  ceres::Problem problem;
+  for (int i = 0; i < data_num_max_; i++)
+  {
+    problem.AddResidualBlock(
+        new AutoDiffCostFunction<OffsetCalibration, 1, 1, 1>(new OffsetCalibration(
+            angle_yaml[2 * i], angle_yaml[2 * i + 1], position_yaml[2 * i], position_yaml[2 * i + 1])),
+        NULL, &offset1, &offset2);
+  }
+
+  ceres::Solver::Options options;
+  options.linear_solver_type = ceres::DENSE_QR;
+  options.minimizer_progress_to_stdout = true;
+
+  ceres::Solver::Summary summary;
+  Solve(options, &problem, &summary);
+  std::cout << summary.BriefReport() << "\n";
+  std::cout << "Offset 1 : " << offset1 << "\n";
+  std::cout << "Offset 2 : " << offset2 << "\n";
+}
+
+int main(int argc, char** argv)
+{
+  google::InitGoogleLogging(argv[0]);
+
+  ros::init(argc, argv, "robo_2d_calibrator");
+
+  readYaml();
+
+  return 0;
+}
