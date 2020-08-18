@@ -38,19 +38,22 @@ SensorMeasurementData::SensorMeasurementData(ros::NodeHandle* n)
   my_output_ = check;
   my_output_ = my_output_ + "/" + std::string(date_holder);
   my_output_.append("_output.yaml");
+
+  // Sets filepath of outputted yaml file to file_path parameter in launch file.
+  n->setParam("file_path", my_output_);
 }
 
 // Method to calculate the position of the end effector.
 Eigen::Vector2d SensorMeasurementData::eePos(double joint_1, double joint_2)
 {
-  // Includes the offsets for joint angles.
-  double Theta1 = joint_1 - (theta1_offset_ * M_PI / 180);
-  double Theta2 = joint_2 - (theta2_offset_ * M_PI / 180);
+  // Includes the offsets (in radians) for joint angles.
+  double Theta1 = joint_1 - theta1_offset_;
+  double Theta2 = joint_2 - theta2_offset_;
 
   // Calculates the end effector position.
   Vector2d position;
-  position << (link_1_ * cos(Theta1 * M_PI / 180)) + (link_2_ * cos((Theta1 + Theta2) * M_PI / 180)),
-      (link_1_ * sin(Theta1 * M_PI / 180)) + (link_2_ * sin((Theta1 + Theta2) * M_PI / 180));
+  position << (link_1_ * cos(Theta1)) + (link_2_ * cos(Theta1 + Theta2)),
+      (link_1_ * sin(Theta1)) + (link_2_ * sin(Theta1 + Theta2));
 
   return position;
 }
@@ -93,9 +96,9 @@ std::string SensorMeasurementData::saveJointAnglesEepos(Vector2d end_effector_po
   std::string output_data_;
   YAML::Emitter d_output;
   d_output << YAML::BeginSeq;
-  d_output << YAML::BeginMap << YAML::Key << "joint angles" << YAML::Value << YAML::Flow << YAML::BeginSeq
+  d_output << YAML::BeginMap << YAML::Key << "joint_angles" << YAML::Value << YAML::Flow << YAML::BeginSeq
            << position_joint1_ << position_joint2_ << YAML::EndSeq;
-  d_output << YAML::Key << "end effector position" << YAML::Value << YAML::Flow << YAML::BeginSeq
+  d_output << YAML::Key << "end_effector_position" << YAML::Value << YAML::Flow << YAML::BeginSeq
            << end_effector_position(0) << end_effector_position(1) << YAML::EndSeq << YAML::EndMap;
   d_output << YAML::EndSeq;
 

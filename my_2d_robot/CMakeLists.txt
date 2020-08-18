@@ -110,7 +110,6 @@ find_package(yaml-cpp REQUIRED)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
- INCLUDE_DIRS include/${HEADER_FILES}
  LIBRARIES my_2d_robot
  CATKIN_DEPENDS roscpp roslib std_msgs sensor_msgs genmsg
 # DEPENDS system_lib

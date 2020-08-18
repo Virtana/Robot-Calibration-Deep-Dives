@@ -80,21 +80,23 @@ void readYaml()
   {
     const YAML::Node& reading = *it;
 
-    // Outputting. This works.
-    // std::cout << reading["joint angles"][0].as<double>() << std::endl;
-    // std::cout << reading["joint angles"][1].as<double>() << std::endl;
-    // std::cout << reading["end effector position"][0].as<double>() << std::endl;
-    // std::cout << reading["end effector position"][1].as<double>() << std::endl;
-
-    // Storing in vectors using for loop -- WORKSSSS.
+    // Storing in vectors using for loop.
     angle_yaml.push_back(reading["joint_angles"][0].as<double>());
     angle_yaml.push_back(reading["joint_angles"][1].as<double>());
     position_yaml.push_back(reading["end_effector_position"][0].as<double>());
     position_yaml.push_back(reading["end_effector_position"][1].as<double>());
   }
 
-  double offset1 = 0.992;
-  double offset2 = 0.555;
+  // Printing the offset joint angles and actual end effector positions.
+  for (int i = 0; i < data_num_max_; i++)
+  {
+    std::cout << "(" << angle_yaml[2 * i] << "," << angle_yaml[2 * i + 1] << ")" << std::endl;
+    std::cout << "(" << position_yaml[2 * i] << "," << position_yaml[2 * i + 1] << ")" << std::endl;
+  }
+
+  // Initial values of offsets for ceres solver.
+  double offset1 = 0.0;
+  double offset2 = 0.0;
 
   ceres::Problem problem;
   for (int i = 0; i < data_num_max_; i++)
