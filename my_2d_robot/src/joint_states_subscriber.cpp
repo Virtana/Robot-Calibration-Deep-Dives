@@ -35,12 +35,12 @@ SensorMeasurementData::SensorMeasurementData(ros::NodeHandle* n)
     boost::filesystem::create_directory(check);
   }
   // Amends filepath for storing yaml file.
-  my_output_fname_ = check;
-  my_output_fname_ = my_output_fname_ + "/" + std::string(date_holder);
-  my_output_fname_.append("_output.yaml");
+  my_output_ = check;
+  my_output_ = my_output_ + "/" + std::string(date_holder);
+  my_output_.append("_output.yaml");
 
   // Sets filepath of outputted yaml file to file_path parameter in launch file.
-  n->setParam("file_path", my_output_fname_);
+  n->setParam("file_path", my_output_);
 }
 
 // Method to calculate the position of the end effector.
