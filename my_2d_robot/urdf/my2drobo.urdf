@@ -1,4 +1,3 @@
-
 <robot name="robo_2d">
 
     <link name="base">
@@ -81,5 +80,3 @@
     </joint>
 
 </robot>
-
-

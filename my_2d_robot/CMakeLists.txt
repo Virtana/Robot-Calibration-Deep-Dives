@@ -10,8 +10,12 @@ project(my_2d_robot)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  roslib
   std_msgs
+  sensor_msgs
+  genmsg
 )
+
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -73,6 +77,7 @@ find_package(catkin REQUIRED COMPONENTS
 #   std_msgs
 # )
 
+
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
 ################################################
@@ -103,9 +108,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-# INCLUDE_DIRS include
  LIBRARIES my_2d_robot
- CATKIN_DEPENDS roscpp std_msgs
+ CATKIN_DEPENDS roscpp roslib std_msgs sensor_msgs genmsg
 # DEPENDS system_lib
 )
 
@@ -116,14 +120,13 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-  include
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/my_2d_robot.cpp
-# )
+ add_library(${PROJECT_NAME}
+   src/joint_states_subscriber.cpp ${HEADER_FILES}
+ )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -132,7 +135,6 @@ include_directories(
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
-## The recommended prefix ensures that target names across packages don't collide
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -153,9 +155,13 @@ include_directories(
 add_executable(${PROJECT_NAME}_node src/my_2d_robo_state_publisher.cpp)
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
+
 # SUBSCRIBER NODE
-add_executable(${PROJECT_NAME}_subscriber_node src/joint_states_subscriber.cpp)
-target_link_libraries(${PROJECT_NAME}_subscriber_node ${catkin_LIBRARIES})
+add_executable(${PROJECT_NAME}_subscriber_node src/joint_states_subscriber.cpp src/joint_states_subscriber.h)
+target_link_libraries(${PROJECT_NAME}_subscriber_node yaml-cpp ${catkin_LIBRARIES})
+
+FIND_PACKAGE(yaml-cpp REQUIRED)
+
 
 #############
 ## Install ##
@@ -186,18 +192,18 @@ target_link_libraries(${PROJECT_NAME}_subscriber_node ${catkin_LIBRARIES})
 # )
 
 ## Mark cpp header files for installation
-# install(DIRECTORY include/${PROJECT_NAME}/
+# install(DIRECTORY include/joint_states_subscriber.h
 #   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 #   FILES_MATCHING PATTERN "*.h"
 #   PATTERN ".svn" EXCLUDE
 # )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
- install(FILES
+# install(FILES
 #   # myfile1
 #   # myfile2
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-)
+#)
 
 #############
 ## Testing ##
@@ -211,5 +217,3 @@ target_link_libraries(${PROJECT_NAME}_subscriber_node ${catkin_LIBRARIES})
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-
-include_directories(include ${catkin_INCLUDE_DIRS})

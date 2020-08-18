@@ -1,19 +1,17 @@
+#include "joint_states_subscriber.h"
 #include "ros/ros.h"
+#include "ros/package.h"
 #include "std_msgs/String.h"
+#include <sensor_msgs/JointState.h>
 
-void joint_statesCallback(const std_msgs::String::ConstPtr& msg)
+int main(int argc, char** argv)
 {
-  ROS_INFO("I heard: [%s]", msg->data.c_str());
-}
+  ros::init(argc, argv, "joint_states_subscriber");
+  ros::NodeHandle n;
 
-int main (int argc, char **argv){
+  SensorMeasurementData my_2d_robo_states = SensorMeasurementData(&n);
 
-    ros::init(argc, argv, "joint_states_subscriber");
-    ros::NodeHandle n;
-    ros::Subscriber sub = n.subscribe("joint_states", 1000, joint_statesCallback);
+  ros::spin();
 
-    ros::spin();
-
-
-    return 0;
+  return 0;
 }
