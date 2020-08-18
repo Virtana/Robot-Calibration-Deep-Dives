@@ -125,7 +125,7 @@ include_directories(
 
 ## Declare a C++ library
  add_library(${PROJECT_NAME}
-   src/joint_states_subscriber.cpp ${HEADER_FILES}
+   src/main.cpp ${HEADER_FILES}
  )
 
 ## Add cmake target dependencies of the library
@@ -157,7 +157,7 @@ target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
 
 # SUBSCRIBER NODE
-add_executable(${PROJECT_NAME}_subscriber_node src/joint_states_subscriber.cpp src/joint_states_subscriber.h)
+add_executable(${PROJECT_NAME}_subscriber_node src/main.cpp src/joint_states_subscriber.cpp src/joint_states_subscriber.h)
 target_link_libraries(${PROJECT_NAME}_subscriber_node yaml-cpp ${catkin_LIBRARIES})
 
 FIND_PACKAGE(yaml-cpp REQUIRED)
