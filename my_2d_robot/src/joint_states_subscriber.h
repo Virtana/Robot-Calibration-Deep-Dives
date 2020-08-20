@@ -47,7 +47,7 @@ private:
   double link_1_;
   double link_2_;
   // String used to store package filepath.
-  std::string my_output_;
+  std::string my_output_fname_;
   // String used to store output data from yaml-cpp.
   std::string output_data_yaml_ = "data: \n";
   // Counts the number of data points received from publisher node.

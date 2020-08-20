@@ -26,21 +26,21 @@ SensorMeasurementData::SensorMeasurementData(ros::NodeHandle* n)
   }
 
   // Gets the package filepath.
-  my_output_ = ros::package::getPath("my_2d_robot");
+  my_output_fname_ = ros::package::getPath("my_2d_robot");
 
   // Checks if Output_yaml folder exists in package and creates folder if it does not already exist.
-  std::string check = my_output_.append("/Output_yaml");
+  std::string check = my_output_fname_.append("/Output_yaml");
   if (!(boost::filesystem::exists(check)))
   {
     boost::filesystem::create_directory(check);
   }
   // Amends filepath for storing yaml file.
-  my_output_ = check;
-  my_output_ = my_output_ + "/" + std::string(date_holder);
-  my_output_.append("_output.yaml");
+  my_output_fname_ = check;
+  my_output_fname_ = my_output_fname_ + "/" + std::string(date_holder);
+  my_output_fname_.append("_output.yaml");
 
   // Sets filepath of outputted yaml file to file_path parameter in launch file.
-  n->setParam("file_path", my_output_);
+  n->setParam("file_path", my_output_fname_);
 }
 
 // Method to calculate the position of the end effector.
@@ -71,7 +71,7 @@ void SensorMeasurementData::jointStatesCallback(const sensor_msgs::JointState::C
   ee_position_ = eePos(position_joint1_, position_joint2_);
 
   std::ofstream fout;
-  fout.open(my_output_);
+  fout.open(my_output_fname_);
   if (!fout)
   {
     ROS_ERROR("error");
