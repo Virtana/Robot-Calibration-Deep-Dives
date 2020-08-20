@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+    <arg name="arm" default="gen3"/>
+    <arg name="dof" default="7" if="$(eval arg('arm') == 'gen3')"/> <!-- Number of degrees of freedom of the arm -->
+    <arg name="dof" default="6" if="$(eval arg('arm') == 'gen3_lite')"/> <!-- Number of degrees of freedom of the arm -->
+    <arg name="vision" default="true"/> <!-- True if the arm has a Vision module -->
+
+    <!-- Gripper configuration -->
+    <arg name="gripper" default=""/>
+
+    <!-- Start Rviz -->
+    <arg name="start_rviz" default="true"/>
+
+    <!-- Load the description for the robot -->
+    <!-- Without gripper -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find robot_3d)/urdf/urdf/gen3_lite_macro.xacro"/>
+
+    <!-- Start RViz -->
+     <node type="rviz" name="rviz" pkg="rviz" args="-d $(find my_2d_robot)/rviz/robosym1.rviz"/>
+</launch>
