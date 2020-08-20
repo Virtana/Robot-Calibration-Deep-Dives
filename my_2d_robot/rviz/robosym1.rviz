@@ -68,22 +68,49 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-          Value: true
-        endlink:
+        base_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        link1:
+        flange:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        link_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        link2:
+        link_2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
+        link_3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        link_6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -104,11 +131,23 @@ Visualization Manager:
         All Enabled: true
         base:
           Value: true
-        endlink:
+        base_link:
           Value: true
-        link1:
+        flange:
           Value: true
-        link2:
+        link_1:
+          Value: true
+        link_2:
+          Value: true
+        link_3:
+          Value: true
+        link_4:
+          Value: true
+        link_5:
+          Value: true
+        link_6:
+          Value: true
+        tool0:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -116,11 +155,18 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        base:
-          link1:
-            link2:
-              endlink:
-                {}
+        base_link:
+          base:
+            {}
+          link_1:
+            link_2:
+              link_3:
+                link_4:
+                  link_5:
+                    link_6:
+                      flange:
+                        tool0:
+                          {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -150,26 +196,26 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/Orbit
-      Distance: 34.963558197021484
+      Class: rviz/XYOrbit
+      Distance: 3.544558048248291
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.07467836141586304
-        Y: 2.9395999908447266
-        Z: 6.2314958572387695
+        X: 0
+        Y: 0
+        Z: 0
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: -0.25460195541381836
+      Pitch: 0.17039865255355835
       Target Frame: base
-      Value: Orbit (rviz)
-      Yaw: 1.5953974723815918
+      Value: XYOrbit (rviz)
+      Yaw: 3.0085763931274414
     Saved: ~
 Window Geometry:
   Displays:
