@@ -36,6 +36,7 @@ private:
   Eigen::Vector2d eePos(double joint_1, double joint_2);
 
   ros::Subscriber sub_;
+
   // Joint positions.
   double position_joint1_;
   double position_joint2_;
@@ -46,14 +47,12 @@ private:
   double link_1_;
   double link_2_;
   // String used to store package filepath.
-  std::string my_output_;
+  std::string my_output_fname_;
   // String used to store output data from yaml-cpp.
-  std::string output_data_yaml_ = "";
+  std::string output_data_yaml_ = "data: \n";
   // Counts the number of data points received from publisher node.
   int data_count_;
   int data_num_max_;
 };
-
-
 
 #endif
