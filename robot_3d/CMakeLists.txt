@@ -12,11 +12,13 @@ find_package(catkin REQUIRED COMPONENTS
   roslib
   std_msgs
   sensor_msgs
+  kdl_parser
 )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
+find_package(orocos_kdl REQUIRED) 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -106,7 +108,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
  LIBRARIES robot_3d
- CATKIN_DEPENDS roscpp roslib std_msgs sensor_msgs
+ CATKIN_DEPENDS roscpp roslib std_msgs sensor_msgs kdl_parser
 #  DEPENDS system_lib
 )
 
@@ -154,6 +156,10 @@ include_directories(
 # PUBLISHER NODE 
 add_executable(${PROJECT_NAME}_node src/joint_states_publisher_3d.cpp)
 target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
+
+# SUBSCRIBER NODE 
+add_executable(${PROJECT_NAME}_subscriber_node src/joint_states_subscriber_3d.cpp)
+target_link_libraries(${PROJECT_NAME}_subscriber_node ${catkin_LIBRARIES})
 
 #############
 ## Install ##
