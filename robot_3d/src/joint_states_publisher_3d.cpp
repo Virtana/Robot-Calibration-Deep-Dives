@@ -13,9 +13,9 @@ int main(int argc, char** argv)
 
   // Gets the loop rate set in the launch file and sends it to ros::rate to set the rate at which the joint angles
   // change.
-  //   double loop_rate;
-  //   n.getParam("loop_rate", loop_rate);
-  ros::Rate my_loop_rate(0.5);
+  double loop_rate;
+  n.getParam("loop_rate", loop_rate);
+  ros::Rate my_loop_rate(loop_rate);
 
   sensor_msgs::JointState joint_state;
   srand(time(0));
