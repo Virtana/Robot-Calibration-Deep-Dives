@@ -96,7 +96,8 @@ std::string SensorMeasurementData::saveJointAnglesEepos(Vector2d end_effector_po
   std::string output_data_;
   YAML::Emitter d_output;
   d_output << YAML::BeginSeq;
-  d_output << YAML::BeginMap << YAML::Key << "joint_angles" << YAML::Value << YAML::Flow << YAML::BeginSeq
+  d_output << YAML::BeginMap << YAML::Key << "link lengths" << YAML::Value << YAML::Flow << YAML::BeginSeq << link_1_ << link_2_ << YAML::EndSeq;
+  d_output << YAML::Key << "joint_angles" << YAML::Value << YAML::Flow << YAML::BeginSeq
            << position_joint1_ << position_joint2_ << YAML::EndSeq;
   d_output << YAML::Key << "end_effector_position" << YAML::Value << YAML::Flow << YAML::BeginSeq
            << end_effector_position(0) << end_effector_position(1) << YAML::EndSeq << YAML::EndMap;

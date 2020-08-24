@@ -1,0 +1,8 @@
+<launch>
+        <param name="robot_description" command="cat $(find my_2d_robot)/urdf/my2drobo.urdf" />
+        <node name="calibrator" pkg="my_2d_robot" type="my_2d_robot_calibrator_node" />
+        <param name="link_1" type="double" value ="5.0" /> 
+        <param name="link_2" type="double" value ="5.0" /> 
+        <param name="data_point_count" type="int" value="5" />
+        <param name="file_path" type="str" value="/home/rebecca/catkin_ws/src/Robot-Calibration-Deep-Dives-RG/my_2d_robot/Output_yaml/test.yaml" />
+</launch>
