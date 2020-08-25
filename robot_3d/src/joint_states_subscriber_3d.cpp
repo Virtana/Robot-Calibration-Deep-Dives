@@ -83,14 +83,28 @@ void JointMeasurementData::kdlTest(double joint_positions[])
   if (kinematics_status >= 0)
   {
     std::cout << cartpos << std::endl;
-    ROS_INFO("%s \n", "Succes, thanks KDL!");
+    ROS_INFO("%s \n", "Success, thanks KDL!");
   }
   else
   {
     ROS_INFO("%s \n", "Error: could not calculate forward kinematics :(");
   }
 
-  
+  KDL::Vector rot_x = cartpos.M.UnitX();
+  KDL::Vector rot_y = cartpos.M.UnitY();
+  KDL::Vector rot_z = cartpos.M.UnitZ();
+  // std::cout << rot_z << std::endl;
+
+  // Trying tf stuff.
+  std::string kdl_test;
+  static tf::TransformBroadcaster br;
+  tf::Transform transform;
+  // Seting translational stuff...
+  transform.setOrigin(tf::Vector3(cartpos.p[0], cartpos.p[1], cartpos.p[2]));
+  tf::Matrix3x3 rot_matrix;
+  rot_matrix.setValue(rot_x[0], rot_y[0], rot_z[0], rot_x[1], rot_y[1], rot_z[1], rot_x[2], rot_y[2], rot_z[2]);
+
+  br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", kdl_test));
 }
 
 int main(int argc, char** argv)
@@ -98,7 +112,7 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "joint_states_subscriber_3d");
 
   ros::NodeHandle n;
-  
+
   JointMeasurementData robot_3d_states = JointMeasurementData(&n);
 
   ros::spin();
