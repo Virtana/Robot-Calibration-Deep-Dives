@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   kdl_parser
   tf
+  tf_conversions
 )
 
 ## System dependencies are found with CMake's conventions
@@ -109,7 +110,7 @@ find_package(orocos_kdl REQUIRED)
 catkin_package(
 #  INCLUDE_DIRS include
  LIBRARIES robot_3d
- CATKIN_DEPENDS roscpp roslib std_msgs sensor_msgs kdl_parser tf
+ CATKIN_DEPENDS roscpp roslib std_msgs sensor_msgs kdl_parser tf tf_conversions
 #  DEPENDS system_lib
 )
 

@@ -1,6 +1,7 @@
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
 #include "std_msgs/String.h"
+
 #include <tf/transform_broadcaster.h>
 
 #include <kdl_parser/kdl_parser.hpp>
@@ -9,6 +10,8 @@
 #include <kdl/chainfksolver.hpp>
 #include <kdl/chainfksolverpos_recursive.hpp>
 #include <kdl/frames_io.hpp>
+
+#include <tf_conversions/tf_kdl.h>
 
 class JointMeasurementData
 {
@@ -20,7 +23,7 @@ public:
 
 private:
   void jointStatesCallback(const sensor_msgs::JointState::ConstPtr& msg);
-  void kdlTest(double joint_positions[]);
+  void kdlCalc(double joint_positions[]);
 
   // araay to store joint positions for each of the robot joints
   double position[6];
@@ -38,12 +41,12 @@ void JointMeasurementData::jointStatesCallback(const sensor_msgs::JointState::Co
   position[4] = msg->position[4];
   position[5] = msg->position[5];
 
-  kdlTest(position);
+  kdlCalc(position);
 
   ROS_INFO("%F", position[0]);
 }
 
-void JointMeasurementData::kdlTest(double joint_positions[])
+void JointMeasurementData::kdlCalc(double joint_positions[])
 {
   // kdl parser --think this works since I get no errors :)
   KDL::Tree fanuc_tree;
@@ -96,15 +99,11 @@ void JointMeasurementData::kdlTest(double joint_positions[])
   // std::cout << rot_z << std::endl;
 
   // Trying tf stuff.
-  std::string kdl_test;
-  static tf::TransformBroadcaster br;
   tf::Transform transform;
-  // Seting translational stuff...
-  transform.setOrigin(tf::Vector3(cartpos.p[0], cartpos.p[1], cartpos.p[2]));
-  tf::Matrix3x3 rot_matrix;
-  rot_matrix.setValue(rot_x[0], rot_y[0], rot_z[0], rot_x[1], rot_y[1], rot_z[1], rot_x[2], rot_y[2], rot_z[2]);
+  tf::transformKDLToTF(cartpos, transform);
 
-  br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", kdl_test));
+  static tf::TransformBroadcaster br;
+  br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "base", "test_frame"));
 }
 
 int main(int argc, char** argv)

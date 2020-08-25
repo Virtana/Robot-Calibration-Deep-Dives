@@ -4,6 +4,6 @@
 <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 <node name="joint_states_publisher_3d" pkg="robot_3d" type="robot_3d_node" />
 <node name="joint_states_subscriber_3d" pkg="robot_3d" type="robot_3d_subscriber_node" />
-<node pkg="robot_3d" type="robot_3d_subscriber_node" args="/kdlvis" name="tf_broadcaster" />
+<param name="loop_rate" type="double" value="0.5" />
 <node type="rviz" name="rviz" pkg="rviz" args="-d $(find my_2d_robot)/rviz/robosym1.rviz"/>
 </launch>
