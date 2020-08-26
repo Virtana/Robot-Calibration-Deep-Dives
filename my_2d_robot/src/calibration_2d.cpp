@@ -50,8 +50,10 @@ private:
 
 // Function that reads yaml file containing joint angles and end effector position data, stores the data in vectors, and
 // uses ceres solver to calculate the joint angle offsets.
-void calibrate(int data_num_max_, std::string filepath, double link1, double link2)
+void calibrate(int data_num_max_, std::string filepath)
 {
+  double link1;
+  double link2;
   // Vector to store the offset joint angles.
   std::vector<double> angle_yaml;
   // Vector to store end effector positions.
@@ -64,7 +66,9 @@ void calibrate(int data_num_max_, std::string filepath, double link1, double lin
   for (YAML::const_iterator it = data.begin(); it != data.end(); ++it)
   {
     const YAML::Node& reading = *it;
-
+    // Getting link lengths.
+    link1 = reading["link_lengths"][0].as<double>();
+    link2 = reading["link_lengths"][1].as<double>();
     // Storing in vectors using for loop.
     angle_yaml.push_back(reading["joint_angles"][0].as<double>());
     angle_yaml.push_back(reading["joint_angles"][1].as<double>());
@@ -88,7 +92,7 @@ void calibrate(int data_num_max_, std::string filepath, double link1, double lin
   ceres::Problem problem;
   for (int i = 0; i < data_num_max_; i++)
   {
-    // 2, 1, 1 since there are two residuals (and x and y residual) and an offset value for each joint angle. 
+    // 2, 1, 1 since there are two residuals (and x and y residual) and an offset value for each joint angle.
     problem.AddResidualBlock(
         new ceres::AutoDiffCostFunction<OffsetCalibration, 2, 1, 1>(new OffsetCalibration(
             angle_yaml[2 * i], angle_yaml[2 * i + 1], position_yaml[2 * i], position_yaml[2 * i + 1], link1, link2)),
@@ -120,13 +124,11 @@ int main(int argc, char** argv)
   std::string filepath;
 
   ros::NodeHandle n;
-  n.getParam("link_1", link1);
-  n.getParam("link_2", link2);
 
   n.getParam("data_point_count", data_num_max);
   n.param<std::string>("file_path", filepath, "did not work this time");
 
-  calibrate(data_num_max, filepath, link1, link2);
+  calibrate(data_num_max, filepath);
 
   return 0;
 }
