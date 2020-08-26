@@ -1,9 +1,10 @@
-#include <string>
-#include <cstdlib>
-#include <ctime>
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
 #include "std_msgs/String.h"
+
+#include <string>
+#include <cstdlib>
+#include <ctime>
 
 double genRandomAngle(double lower_limit, double upper_limit)
 {
@@ -18,7 +19,7 @@ int main(int argc, char** argv)
   ros::NodeHandle n;
   ros::Publisher joint_pub = n.advertise<sensor_msgs::JointState>("joint_states", 1000);
 
-  // Gets the loop rate set in the launch file and sends it to ros::rate to set the rate at which the joint angles
+  // Getting the loop rate set in the launch file and sends it to ros::rate to set the rate at which the joint angles
   // change.
   double loop_rate;
   n.getParam("loop_rate", loop_rate);
@@ -43,18 +44,17 @@ int main(int argc, char** argv)
     // Generating joint angles for joint 5 within the range [-2.1816, 2.1816].
     double joint_5 = genRandomAngle(-2.1816, 2.1816);
 
-    // There is one message per update. This is 2 since 2 joints are updated at a time.
     joint_state.name.resize(6);
     joint_state.position.resize(6);
 
     joint_state.name = { "joint_1", "joint_2", "joint_3", "joint_4", "joint_5", "joint_6" };
     joint_state.position = { joint_1, joint_2, joint_3, joint_4, joint_5, joint_6 };
 
-    // Outputs data to stdout.
+    // Outputing data to stdout.
     std_msgs::String msg;
     ROS_INFO("%F", joint_state.position[0]);
 
-    // Sends joint state to subscribed nodes.
+    // Sending joint states to subscribed nodes.
     joint_pub.publish(joint_state);
     my_loop_rate.sleep();
   }
