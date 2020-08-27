@@ -20,7 +20,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
-find_package(orocos_kdl REQUIRED) 
+find_package(orocos_kdl REQUIRED)
+find_package(yaml-cpp REQUIRED) 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -161,7 +162,7 @@ target_link_libraries(${PROJECT_NAME}_node ${catkin_LIBRARIES})
 
 # SUBSCRIBER NODE 
 add_executable(${PROJECT_NAME}_subscriber_node src/joint_states_subscriber_3d.cpp)
-target_link_libraries(${PROJECT_NAME}_subscriber_node ${catkin_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}_subscriber_node yaml-cpp ${catkin_LIBRARIES})
 
 #############
 ## Install ##
