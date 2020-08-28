@@ -1,10 +1,10 @@
+#include <cstdlib>
+#include <ctime>
+#include <string>
+
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
 #include "std_msgs/String.h"
-
-#include <string>
-#include <cstdlib>
-#include <ctime>
 
 double genRandomAngle(double lower_limit, double upper_limit)
 {

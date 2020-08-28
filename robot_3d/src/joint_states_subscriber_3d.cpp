@@ -1,17 +1,16 @@
-#include <ros/ros.h>
-#include <sensor_msgs/JointState.h>
-#include "std_msgs/String.h"
-
-#include <tf/transform_broadcaster.h>
-
-#include <kdl_parser/kdl_parser.hpp>
-
 #include <kdl/chain.hpp>
 #include <kdl/chainfksolver.hpp>
 #include <kdl/chainfksolverpos_recursive.hpp>
 #include <kdl/frames_io.hpp>
 
+#include <kdl_parser/kdl_parser.hpp>
+
+#include <ros/ros.h>
+#include <sensor_msgs/JointState.h>
+#include "std_msgs/String.h"
+
 #include <tf_conversions/tf_kdl.h>
+#include <tf/transform_broadcaster.h>
 
 class JointMeasurementData
 {
@@ -19,52 +18,43 @@ public:
   JointMeasurementData(ros::NodeHandle* n)
   {
     sub_ = n->subscribe("joint_states", 1000, &JointMeasurementData::jointStatesCallback, this);
+
+    // Constructing kdl tree from robot urdf.
+    std::string fanuc_robot;
+    KDL::Tree fanuc_tree;
+
+    n->param("/robot_description", fanuc_robot, std::string());
+    if (!kdl_parser::treeFromString(fanuc_robot, fanuc_tree))
+    {
+      ROS_ERROR("Failed to construct kdl tree");
+    }
+
+    // Creating kdl chain from generated tree from base link to end effector.
+    fanuc_tree.getChain("base_link", "tool0", chain_);
   }
 
 private:
   void jointStatesCallback(const sensor_msgs::JointState::ConstPtr& msg);
   // Method to calculate the end effector position using kdl and broadcast the transform.
-  void kdlCalc(double joint_positions[]);
+  void kdlCalc(const std::vector<double> joint_positions);
 
   ros::Subscriber sub_;
+
+  KDL::Chain chain_;
 };
 
 void JointMeasurementData::jointStatesCallback(const sensor_msgs::JointState::ConstPtr& msg)
 {
   ROS_INFO("I heard: [%F]", msg->position[0]);
-  // Array to store the six joint positions from the publisher node.
-  double position[6];
-  position[0] = msg->position[0];
-  position[1] = msg->position[1];
-  position[2] = msg->position[2];
-  position[3] = msg->position[3];
-  position[4] = msg->position[4];
-  position[5] = msg->position[5];
-  // Passing joint positons to method to calculate end effector position.
-  kdlCalc(position);
+  kdlCalc(msg->position);
 }
 
-void JointMeasurementData::kdlCalc(double joint_positions[])
+void JointMeasurementData::kdlCalc(const std::vector<double> joint_positions)
 {
-  // Constructing kdl tree from robot urdf.
-  KDL::Tree fanuc_tree;
-  std::string fanuc_robot;
+  KDL::ChainFkSolverPos_recursive fksolver_ = KDL::ChainFkSolverPos_recursive(chain_);
 
-  ros::NodeHandle n;
-  n.param("/robot_description", fanuc_robot, std::string());
-  if (!kdl_parser::treeFromString(fanuc_robot, fanuc_tree))
-  {
-    ROS_ERROR("Failed to construct kdl tree");
-  }
-
-  // Creating kdl chain from generated tree from base link to end effector.
-  KDL::Chain chain;
-  fanuc_tree.getChain("base_link", "tool0", chain);
-
-  KDL::ChainFkSolverPos_recursive fksolver = KDL::ChainFkSolverPos_recursive(chain);
- 
- // Creating a kdl array to store joint positions.
-  unsigned int nj = chain.getNrOfJoints();
+  // Creating a kdl array to store joint positions.
+  unsigned int nj = chain_.getNrOfJoints();
   KDL::JntArray jointpositions = KDL::JntArray(nj);
   ROS_INFO("NrOfJoints =%d", nj);
 
@@ -77,9 +67,9 @@ void JointMeasurementData::kdlCalc(double joint_positions[])
   // Create the frame that will contain the end effector pose.
   KDL::Frame cartpos;
 
-  // Calculate forward kinematics for end effector. 
+  // Calculate forward kinematics for end effector.
   bool kinematics_status;
-  kinematics_status = fksolver.JntToCart(jointpositions, cartpos);
+  kinematics_status = fksolver_.JntToCart(jointpositions, cartpos);
   if (kinematics_status >= 0)
   {
     std::cout << cartpos << std::endl;
